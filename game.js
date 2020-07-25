@@ -1,9 +1,9 @@
-const TIMEOUT = 100;
+const TIMEOUT = 1;
 const LIVE_P_MAX = 0.5;
 const LIVE_P_MIN = 0.01;
 
-var rows = 50;
-var cols = 50;
+var rows = 20;
+var cols = 20;
 
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
@@ -19,7 +19,10 @@ var grid = Array.from(Array(rows), _ =>
     Array(cols).fill(0)
 );
 
-canvas.addEventListener("touchend", handleEnd, false);
+// Current random color
+var currColor = ctx.fillStyle = rainbow(256, Math.floor(Math.random() * 256));
+
+canvas.addEventListener("click", handleEnd, false);
 
 start();
 
@@ -149,14 +152,17 @@ function update() {
 function loop(){
     console.log('tick');
     update();
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctx.fillStyle = "#242424";
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    //ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     //drawGrid();
+    ctx.fillStyle = currColor
     drawContent(grid);
     setTimeout(loop, TIMEOUT);
 }
 
-function start(){
-    ctx.fillStyle = rainbow(256, Math.floor(Math.random() * 256));
+function start() {
     randomSeed();
+    currColor = ctx.fillStyle = rainbow(256, Math.floor(Math.random() * 256));
     loop();
 }
