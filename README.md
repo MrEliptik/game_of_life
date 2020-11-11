@@ -1,6 +1,6 @@
 # Game of life
 
-**Note: I originally made this in Javascript, but due to poor performance on the rpi zero, I switched to Python. You can still find the code in the js folder**
+*Note: I originally made this in Javascript, but due to poor performance on the rpi zero, I switched to Python. You can still find the code in the js folder*
 
 ## Touchscreen configuration 
 
