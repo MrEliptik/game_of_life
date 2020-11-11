@@ -100,6 +100,9 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONUP:
+                random_init_grid(_grid)
+                display(_grid)
         # Copy new grid
         _grid[:] = update_grid(_grid)
         display(_grid)
