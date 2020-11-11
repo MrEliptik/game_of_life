@@ -21,6 +21,8 @@ _grid = np.full((row, col), None)
 
 screen = None
 
+refresh_start_time = 0
+
 
 def init_screen():
     pygame.init()
@@ -90,6 +92,7 @@ def update_grid(grid):
     return new_grid
 
 if __name__ == "__main__":
+    refresh_start_time = time.time()
     running = True
     inpt = "y"
     screen = init_screen()
@@ -97,6 +100,10 @@ if __name__ == "__main__":
     display(_grid)
     while(running):
         start = time.time()
+        if ((time.time() - refresh_start_time) > 60):
+            random_init_grid(_grid)
+            display(_grid)
+            refresh_start_time = time.time()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
