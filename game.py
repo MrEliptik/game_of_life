@@ -6,8 +6,10 @@ import numpy as np
 WHITE = 255, 255, 255
 BLACK = 0, 0, 0
 size = width, height = 480, 320
-row = 18
-col = 32
+#row = 36
+#col = 64
+row = 80
+col = 120
 cell_width = (width//col)
 cell_height = (height//row)
 font_size = 60
@@ -59,10 +61,11 @@ def get_cell(grid, cell):
     return val
 
 def get_neighbors(grid, cell):
-    return (get_cell(grid, (cell[0], cell[1]-1)), get_cell(grid, (cell[0]-1, cell[1]-1)),
-    get_cell(grid, (cell[0]-1, cell[1])), get_cell(grid, (cell[0-1], cell[1]+1)),
-    get_cell(grid, (cell[0], cell[1]+1)), get_cell(grid, (cell[0]+1, cell[1]+1)),
-    get_cell(grid, (cell[0]+1, cell[1])), get_cell(grid, (cell[0]+1, cell[1]-1)))
+    x, y = cell
+    return (get_cell(grid, (x, y-1)), get_cell(grid, (x-1, y-1)),
+    get_cell(grid, (x-1, y)), get_cell(grid, (x-1, y+1)),
+    get_cell(grid, (x, y+1)), get_cell(grid, (x+1, y+1)),
+    get_cell(grid, (x+1, y)), get_cell(grid, (x+1, y-1)))
 
 def get_living_neighbors(neighbors):
     living_count = 0
@@ -78,16 +81,14 @@ def update_grid(grid):
         for j in range(col):
             neighbors = get_neighbors(grid, (i,j))
             living = get_living_neighbors(neighbors)
-            print(living)
         
-            # Any dead cell with three live neighbors becoems a live cell
+            # Any live cell with three live neighbors survivesl
             if ((living == 2 or living == 3) and grid[i][j] == 1): new_grid[i][j] = 1
 
             # Any dead cell with three live neighbors becomes a live cell
-            if (living == 3 and grid[i][j] == 0): new_grid[i][j] = 1
+            if (living == 3 and grid[i][j] == None): new_grid[i][j] = 1
 
             # All others cells are dead (tmp is initialized at 0)
-    print(new_grid)
     return new_grid
 
 if __name__ == "__main__":
@@ -103,7 +104,6 @@ if __name__ == "__main__":
                 running = False
         # Copy new grid
         _grid[:] = update_grid(_grid)
-        #print(_grid)
         display(_grid)
         while(time.time() - start < (1/FPS)):
             pass
