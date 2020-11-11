@@ -6,10 +6,8 @@ import numpy as np
 WHITE = 255, 255, 255
 BLACK = 0, 0, 0
 size = width, height = 480, 320
-#row = 36
-#col = 64
-row = 80
-col = 120
+row = 32
+col = 48
 cell_width = (width//col)
 cell_height = (height//row)
 font_size = 60
@@ -26,7 +24,7 @@ screen = None
 
 def init_screen():
     pygame.init()
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
     screen.fill(BLACK)
     
     return screen
