@@ -1,5 +1,6 @@
-# Game of life JS
+# Game of life
 
+**Note: I originally made this in Javascript, but due to poor performance on the rpi zero, I switched to Python. You can still find the code in the js folder**
 
 ## Touchscreen configuration 
 
@@ -14,7 +15,11 @@ In `/usr/share/X11/xorg.conf.d/99-calibration.conf`, I used the following
         	Option "InvertX" "1"
         	Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
 	EndSection
+	
+## Launching with python
 
-## Launching chrome in kiosk
+	DISPLAY=:0 python3 game.py
+
+## (JS) Launching chrome in kiosk
 
 	DISPLAY=:0 chromium-browser --start-fullscreen --kiosk --noerrdialogs /home/pi/game_of_life_js/game.html
